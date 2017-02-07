@@ -1,0 +1,1 @@
+C:\Users\Rafael Johansen\Dropbox\Master - HSN\2nd Semester\Object-oriented Analysis, Design and Programming\Assignment 1 - DAQ simulator\[DAQ-sim]\DAQsim\DAQsim\bin\Debug\DAQsim.exe.config
