@@ -28,20 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnSampling = new System.Windows.Forms.Button();
-            this.btnLogging = new System.Windows.Forms.Button();
-            this.txtSensorVal = new System.Windows.Forms.TextBox();
-            this.txtNextSampling = new System.Windows.Forms.TextBox();
-            this.txtNextLogging = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.txtNextSampling = new System.Windows.Forms.TextBox();
+            this.btnSampling = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.txtNextLogging = new System.Windows.Forms.TextBox();
+            this.btnLogging = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtSamplingDev = new System.Windows.Forms.TextBox();
+            this.txtSensorVal = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.operationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nextSamling = new System.Windows.Forms.Timer(this.components);
+            this.nextLogging = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -59,7 +64,34 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Sampling";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(132, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Next Samling Time (msec):";
+            // 
+            // txtNextSampling
+            // 
+            this.txtNextSampling.Location = new System.Drawing.Point(145, 19);
+            this.txtNextSampling.Name = "txtNextSampling";
+            this.txtNextSampling.ReadOnly = true;
+            this.txtNextSampling.Size = new System.Drawing.Size(49, 20);
+            this.txtNextSampling.TabIndex = 1;
+            this.txtNextSampling.Text = "1700";
+            // 
+            // btnSampling
+            // 
+            this.btnSampling.Location = new System.Drawing.Point(6, 71);
+            this.btnSampling.Name = "btnSampling";
+            this.btnSampling.Size = new System.Drawing.Size(95, 23);
+            this.btnSampling.TabIndex = 0;
+            this.btnSampling.Text = "Sampling";
+            this.btnSampling.UseVisualStyleBackColor = true;
+            this.btnSampling.Click += new System.EventHandler(this.btnSampling_Click);
             // 
             // groupBox2
             // 
@@ -73,24 +105,23 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Logging";
             // 
-            // groupBox3
+            // label2
             // 
-            this.groupBox3.Controls.Add(this.txtSensorVal);
-            this.groupBox3.Location = new System.Drawing.Point(227, 38);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(151, 206);
-            this.groupBox3.TabIndex = 2;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Sensor Values";
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(8, 26);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(133, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Next Logging Time (msec):";
             // 
-            // btnSampling
+            // txtNextLogging
             // 
-            this.btnSampling.Location = new System.Drawing.Point(6, 71);
-            this.btnSampling.Name = "btnSampling";
-            this.btnSampling.Size = new System.Drawing.Size(95, 23);
-            this.btnSampling.TabIndex = 0;
-            this.btnSampling.Text = "Sampling";
-            this.btnSampling.UseVisualStyleBackColor = true;
+            this.txtNextLogging.Location = new System.Drawing.Point(145, 23);
+            this.txtNextLogging.Name = "txtNextLogging";
+            this.txtNextLogging.ReadOnly = true;
+            this.txtNextLogging.Size = new System.Drawing.Size(49, 20);
+            this.txtNextLogging.TabIndex = 2;
+            this.txtNextLogging.Text = "30";
             // 
             // btnLogging
             // 
@@ -101,46 +132,44 @@
             this.btnLogging.Text = "Logging on file";
             this.btnLogging.UseVisualStyleBackColor = true;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Controls.Add(this.txtSamplingDev);
+            this.groupBox3.Controls.Add(this.txtSensorVal);
+            this.groupBox3.Location = new System.Drawing.Point(227, 38);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(787, 206);
+            this.groupBox3.TabIndex = 2;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Sensor Values";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 19);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(136, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Number of sensor devices: ";
+            // 
+            // txtSamplingDev
+            // 
+            this.txtSamplingDev.Location = new System.Drawing.Point(148, 16);
+            this.txtSamplingDev.Name = "txtSamplingDev";
+            this.txtSamplingDev.ReadOnly = true;
+            this.txtSamplingDev.Size = new System.Drawing.Size(49, 20);
+            this.txtSamplingDev.TabIndex = 4;
+            this.txtSamplingDev.Text = "8";
+            // 
             // txtSensorVal
             // 
-            this.txtSensorVal.Location = new System.Drawing.Point(6, 19);
+            this.txtSensorVal.Location = new System.Drawing.Point(6, 38);
             this.txtSensorVal.Multiline = true;
             this.txtSensorVal.Name = "txtSensorVal";
             this.txtSensorVal.ReadOnly = true;
-            this.txtSensorVal.Size = new System.Drawing.Size(138, 181);
+            this.txtSensorVal.Size = new System.Drawing.Size(775, 162);
             this.txtSensorVal.TabIndex = 0;
-            // 
-            // txtNextSampling
-            // 
-            this.txtNextSampling.Location = new System.Drawing.Point(112, 19);
-            this.txtNextSampling.Name = "txtNextSampling";
-            this.txtNextSampling.Size = new System.Drawing.Size(82, 20);
-            this.txtNextSampling.TabIndex = 1;
-            // 
-            // txtNextLogging
-            // 
-            this.txtNextLogging.Location = new System.Drawing.Point(112, 19);
-            this.txtNextLogging.Name = "txtNextLogging";
-            this.txtNextLogging.Size = new System.Drawing.Size(82, 20);
-            this.txtNextLogging.TabIndex = 2;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(98, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Next Samling Time:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(8, 26);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(99, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Next Logging Time:";
             // 
             // menuStrip1
             // 
@@ -150,7 +179,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(391, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1026, 24);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -172,11 +201,23 @@
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
+            // nextSamling
+            // 
+            this.nextSamling.Enabled = true;
+            this.nextSamling.Interval = 1;
+            this.nextSamling.Tick += new System.EventHandler(this.nextSamling_Tick);
+            // 
+            // nextLogging
+            // 
+            this.nextLogging.Enabled = true;
+            this.nextLogging.Interval = 1;
+            this.nextLogging.Tick += new System.EventHandler(this.nextLogging_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(391, 258);
+            this.ClientSize = new System.Drawing.Size(1026, 258);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -184,6 +225,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "DAQ Simulator";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -213,6 +255,10 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem operationsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtSamplingDev;
+        private System.Windows.Forms.Timer nextSamling;
+        private System.Windows.Forms.Timer nextLogging;
     }
 }
 
